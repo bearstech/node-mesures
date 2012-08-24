@@ -1,17 +1,30 @@
-
-#logo {
-  width: 122px;
-  height: 31px;
+body {
+    position: relative;
+    margin: 30px, auto;
+    width: 900px;
 }
 
-#fork {
-  position: absolute;
-  top: 0;
-  right: 0;
+/*#fork {*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*right: 0;*/
+/*}*/
+
+header {
+  font-weight: 500;
+  padding: 6px;
+}
+
+.group {
+  margin-bottom: 1em;
 }
 
 .axis {
   font: 10px sans-serif;
+  position: fixed;
+  pointer-events: none;
+  z-index: 2;
+
 }
 
 .axis text {
@@ -27,19 +40,35 @@
   shape-rendering: crispEdges;
 }
 
+.axis.top {
+  background-image: linear-gradient(top, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -o-linear-gradient(top, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -moz-linear-gradient(top, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -webkit-linear-gradient(top, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -ms-linear-gradient(top, #fff 0%, rgba(255,255,255,0) 100%);
+  top: 0px;
+  padding: 0 0 24px 0;
+}
+
+.axis.bottom {
+  background-image: linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -o-linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -moz-linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -webkit-linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -ms-linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  bottom: 0px;
+  padding: 24px 0 0 0;
+}
+
+
 .horizon {
   border-bottom: solid 1px #000;
   overflow: hidden;
   position: relative;
 }
 
-.horizon {
+:not(.horizon) + .horizon {
   border-top: solid 1px #000;
-  border-bottom: solid 1px #000;
-}
-
-.horizon + .horizon {
-  border-top: none;
 }
 
 .horizon canvas {
@@ -68,4 +97,16 @@
   background: #000;
   opacity: .2;
   z-index: 2;
+}
+
+#step {
+  position: fixed;
+  bottom: 6px;
+  z-index: 3;
+}
+
+@media all and (max-width: 1439px) {
+  body { margin: 0px auto; }
+  .axis { position: static; }
+  .axis.top, .axis.bottom { padding: 0; }
 }

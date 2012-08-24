@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <title>Cube</title>
+
 <style>
-
 @import url(style_cube.css);
-
 </style>
+
 <select id="step">
   <option value="1e4">10 seconds</option>
   <option value="6e4">1 minute</option>
   <option value="3e5">5 minutes</option>
 </select>
-        <script src="http://d3js.org/d3.v2.min.js" type="text/javascript"></script>
-        <script src="cubism_v1_min.js" type="text/javascript"></script>
-        <script src="metrics_cube.js" type="text/javascript"></script>
-<script>
+
+<script src="d3_v2_min.js" type="text/javascript"></script>
+<script src="cubism_v1_min.js" type="text/javascript"></script>
+<script type="text/javascript">
 
 //
-var step = +cubism.option("step", 1e4);
+var step = cubism.option("step", 1e4);
 
 //
 var context = cubism.context()
     .step(step)
-    .size(1440);
+    .size(900);
 
 //
 var cube = context.cube();
@@ -40,30 +40,15 @@ d3.select("body").append("div")
     .call(context.rule());
 
 //
-d3.select("body").insert("div", ".bottom")
-    .attr("class", "group")
-    .call(function() { this.append("header").text("performance"); })
-  .selectAll(".horizon")
-    .data([
-      {title: "load", metric: cube.metric("sum(cube_compute(ms))").divide(step)},
-      {title: "median latency (ms)", metric: cube.metric("median(cube_compute(ms))")}
-    ])
-  .enter().append("div")
-    .attr("class", "horizon")
-  .call(context.horizon()
-    .title(function(d) { return d.title; })
-    .metric(function(d) { return d.metric; }));
-
-//
 d3.json("/1.0/types", function(types) {
   d3.select("body").insert("div", ".bottom")
       .attr("class", "group")
-      .call(function() { this.append("header").text("incoming events (/s)"); })
+      .call(function() { this.append("header").text("Mesures"); })
     .selectAll(".horizon")
       .data(types)
     .enter().append("div")
       .attr("class", "horizon")
-    .call(context.horizon()
+    .call(context.horizon().height(90)
       .metric(function(d) { return cube.metric( d + " mean").divide(step / 1e3); }));
 });
 
@@ -83,4 +68,3 @@ d3.select("#step").on("change", function() {
 });
 
 </script>
-
