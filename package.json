@@ -2,7 +2,7 @@
     "name": "mesures",
     "description": "",
     "keywords": ["metrics"],
-    "version": "0.3.1",
+    "version": "0.3.2",
     "homepage": "https://github.com/bearstech/node-mesures",
     "repository": "git://github.com/bearstech/node-mesures.git",
     "author": "Mathieu Lecarme <mlecarme@bearstech.com>",
